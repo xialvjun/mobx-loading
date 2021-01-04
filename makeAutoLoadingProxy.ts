@@ -1,10 +1,10 @@
-import { makeAutoObservable } from "mobx";
+import { observable } from "mobx";
 import { AllowedNames, isPromise, getPropertyNames } from "./utils";
 
 export function makeAutoLoadingProxy<T, L extends PropertyKey = "loading", S extends PropertyKey = "some">(
   target: T,
-  loadingKey: L = "loading" as any,
-  someKey: S = "some" as any,
+  loadingKey: L | "loading" = "loading",
+  someKey: S | "some" = "some",
 ): T &
   {
     [l in L]: { [s in S]: boolean } & { [K in AllowedNames<T, Function>]: Parameters<T[K]>[] };
@@ -22,23 +22,30 @@ export function makeAutoLoadingProxy<T, L extends PropertyKey = "loading", S ext
         },
       },
     );
-  makeAutoObservable(loading);
+  observable(loading);
+  const cache: any = {};
   return new Proxy<any>(target, {
     get(t, p, r) {
       if (p === loadingKey) {
         return loading;
       }
+      if (cache[p]) {
+        return cache[p];
+      }
       const v = t[p];
       if (typeof v === "function") {
-        return function () {
-          const args = [...arguments];
-          let res = v.apply(this, args);
-          if (res && isPromise(res)) {
-            loading[p].push(args);
-            (res as any).finally(() => loading[p].splice(loading[p].indexOf(args)));
-          }
-          return res;
-        };
+        Object.assign(cache, {
+          [p]: function () {
+            const args = [...arguments];
+            let res = v.apply(this, args);
+            if (res && isPromise(res)) {
+              loading[p].push(args);
+              (res as any).finally(() => loading[p].splice(loading[p].indexOf(args)));
+            }
+            return res;
+          },
+        });
+        return cache[p];
       }
       return v;
     },

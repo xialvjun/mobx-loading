@@ -4,52 +4,54 @@
 
 // todo: https://github.com/microsoft/TypeScript/issues/29652#issuecomment-752858857
 
+export * from './makeAutoLoading';
+export * from './makeAutoLoadingProxy'
 
-import { autorun, makeAutoObservable } from 'mobx';
-import * as mobx from 'mobx';
-import { makeAutoLoading } from './makeAutoLoading';
-// import { AutoLoading } from './.gitignore.d/AutoLoading';
+// import { autorun, makeAutoObservable } from 'mobx';
+// import * as mobx from 'mobx';
+// import { makeAutoLoading } from './makeAutoLoading';
+// // import { AutoLoading } from './.gitignore.d/AutoLoading';
 
-(window as any).mobx = mobx;
+// (window as any).mobx = mobx;
 
-const delay = (ms: number) => new Promise(res => setTimeout(() => res(ms), ms));
+// const delay = (ms: number) => new Promise(res => setTimeout(() => res(ms), ms));
 
-class A {
-  loading: makeAutoLoading<A, 'loading'>;
-  constructor() {
-    makeAutoLoading(this, 'loading');
-    makeAutoObservable(this);
-  }
-  *a(m: number) {
-    const last_args = this.loading.a.slice(-1)[0];
-    const res = yield delay(m);
-    if (last_args !== this.loading.a.slice(-1)[0]) return;
-    console.log(res);
-  }
-  async b(m: number) {
-    const last_args = this.loading.a.slice(-1)[0];
-    const res = await delay(m);
-    if (last_args !== this.loading.a.slice(-1)[0]) return;
-    console.log(res);
-  }
-  c = (function*(this: A, m: number) {
-    const last_args = this.loading.a.slice(-1)[0];
-    const res = yield delay(m);
-    if (last_args !== this.loading.a.slice(-1)[0]) return;
-    console.log(res);
-  }).bind(this)
-  d = async (m: number) => {
-    const last_args = this.loading.a.slice(-1)[0];
-    const res = await delay(m);
-    if (last_args !== this.loading.a.slice(-1)[0]) return;
-    console.log(res);
-  }
-}
+// class A {
+//   loading: makeAutoLoading<A, 'loading'>;
+//   constructor() {
+//     makeAutoLoading(this, 'loading');
+//     makeAutoObservable(this);
+//   }
+//   *a(m: number) {
+//     const last_args = this.loading.a.slice(-1)[0];
+//     const res = yield delay(m);
+//     if (last_args !== this.loading.a.slice(-1)[0]) return;
+//     console.log(res);
+//   }
+//   async b(m: number) {
+//     const last_args = this.loading.a.slice(-1)[0];
+//     const res = await delay(m);
+//     if (last_args !== this.loading.a.slice(-1)[0]) return;
+//     console.log(res);
+//   }
+//   c = (function*(this: A, m: number) {
+//     const last_args = this.loading.a.slice(-1)[0];
+//     const res = yield delay(m);
+//     if (last_args !== this.loading.a.slice(-1)[0]) return;
+//     console.log(res);
+//   }).bind(this)
+//   d = async (m: number) => {
+//     const last_args = this.loading.a.slice(-1)[0];
+//     const res = await delay(m);
+//     if (last_args !== this.loading.a.slice(-1)[0]) return;
+//     console.log(res);
+//   }
+// }
 
-var a = (window as any).a = new A();
-autorun(() => {
-  console.log(a.loading.some);
-});
+// var a = (window as any).a = new A();
+// autorun(() => {
+//   console.log(JSON.stringify(a));
+// });
 
 // class B extends AutoLoading<B> {
 //   // constructor() {
