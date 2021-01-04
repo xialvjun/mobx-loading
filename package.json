@@ -1,0 +1,27 @@
+{
+  "name": "@xialvjun/mobx-loading",
+  "version": "0.1.0",
+  "description": "typesafe loading in mobx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xialvjun/mobx-loading.git"
+  },
+  "keywords": [
+    "mobx",
+    "loading",
+    "typescript"
+  ],
+  "author": "xialvjun@live.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xialvjun/mobx-loading/issues"
+  },
+  "homepage": "https://github.com/xialvjun/mobx-loading#readme",
+  "devDependencies": {
+    "mobx": "^6.0.4"
+  }
+}
