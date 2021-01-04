@@ -18,9 +18,9 @@ export type FilterFlags<Base, Condition> = {
 export type AllowedNames<Base, Condition> = FilterFlags<Base, Condition>[keyof Base];
 // type SubType<Base, Condition> = Pick<Base, AllowedNames<Base, Condition>>;
 
-// AllowedNames 里的两处 Base 引用 在把 l:AllowedNames 赋给 Base 作为属性时, 会导致 类型循环引用, 需要把该属性 key 移除
-export type AllowedNamesExclude<Base, Condition, Ex> = FilterFlags<Base, Condition>[Exclude<keyof Base, Ex>];
-export type TLoading<T, L extends PropertyKey, S extends PropertyKey = "some"> = {
-  [s in S]: boolean;
-} &
-  { [P in FilterFlags<Omit<T, L>, Function>[keyof Omit<T, L>]]: Parameters<T[P]>[] };
+// // AllowedNames 里的两处 Base 引用 在把 l:AllowedNames 赋给 Base 作为属性时, 会导致 类型循环引用, 需要把该属性 key 移除
+// export type AllowedNamesExclude<Base, Condition, Ex> = FilterFlags<Base, Condition>[Exclude<keyof Base, Ex>];
+// export type TLoading<T, L extends PropertyKey, S extends PropertyKey = "some"> = {
+//   [s in S]: boolean;
+// } &
+//   { [P in FilterFlags<Omit<T, L>, Function>[keyof Omit<T, L>]]: Parameters<T[P]>[] };
