@@ -1,9 +1,12 @@
 {
   "name": "@xialvjun/mobx-loading",
   "version": "0.1.0",
-  "description": "typesafe loading in mobx",
+  "description": "add typesafe loading to actions in mobx(compatible for mobx 4/5/6).",
+  "source": "index.ts",
   "main": "index.js",
+  "module": "index.esm.js",
   "scripts": {
+    "build": "tsc -m es2015 && mv index.js index.esm.js && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +24,9 @@
     "url": "https://github.com/xialvjun/mobx-loading/issues"
   },
   "homepage": "https://github.com/xialvjun/mobx-loading#readme",
+  "peerDependencies": {
+    "mobx": ">=4 <7"
+  },
   "devDependencies": {
     "mobx": "^6.0.4"
   }

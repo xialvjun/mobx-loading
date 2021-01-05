@@ -1,0 +1,10 @@
+dependencies:
+  mobx: 6.0.4
+lockfileVersion: 5.2
+packages:
+  /mobx/6.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-wT2QJT9tW19VSHo9x7RPKU3z/I2Ps6wUS8Kb1OO+kzmg7UY3n4AkcaYG6jq95Lp1R9ohjC/NGYuT2PtuvBjhFg==
+specifiers:
+  mobx: ^6.0.4
