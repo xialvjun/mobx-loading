@@ -7,10 +7,10 @@ add typesafe loading to actions in mobx(compatible for mobx 4/5/6).
 - `loading[this_action_name]: Parameters<typeof this_action>[]` is this action's all calling parameters, so you can do many things like debounce action;
 - `loading[this_action_name].length > 0` is this action loading;
 
-### examples
+## examples
 see git `examples` directory.
 
-###### mobx 6
+#### mobx 6
 ```ts
 import { makeAutoObservable, autorun } from "mobx";
 import { makeAutoLoading } from "@xialvjun/mobx-loading";
@@ -47,7 +47,7 @@ const t = new A();
 autorun(() => console.log(t.loading.some, JSON.stringify(t)));
 ```
 
-###### mobx 5 / mobx 4
+#### mobx 5 / mobx 4
 ```ts
 import { observable, autorun, flow } from "mobx";
 import { autoLoading } from "@xialvjun/mobx-loading";
